@@ -35,10 +35,10 @@ public class RandomConfig implements Supplier<Properties> {
   private String             name             = DEFAULT_NAME;
   private int                count            = 0;
   private int                length           = DEFAULT_LENGTH;
-  private int                lower            = 1;
-  private int                upper            = 1;
+  private int                lower            = 0;
+  private int                upper            = 0;
   private int                specials         = 0;
-  private int                numbers          = 1;
+  private int                numbers          = 0;
   private String             specialSet       = DEFAULT_SPECIALS;
   private String             format           = DEFAULT_FORMAT;
 
