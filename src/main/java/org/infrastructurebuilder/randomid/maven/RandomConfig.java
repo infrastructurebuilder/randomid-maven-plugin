@@ -21,6 +21,7 @@ import static java.util.Objects.requireNonNull;
 import java.time.Instant;
 import java.util.Properties;
 import java.util.Random;
+import java.util.UUID;
 import java.util.function.Supplier;
 
 public class RandomConfig implements Supplier<Properties> {
@@ -41,6 +42,11 @@ public class RandomConfig implements Supplier<Properties> {
   private int                numbers          = 0;
   private String             specialSet       = DEFAULT_SPECIALS;
   private String             format           = DEFAULT_FORMAT;
+  private boolean            uuid             = false;
+
+  public void setUuid(boolean uuid) {
+    this.uuid = uuid;
+  }
 
   public void setName(String name) {
     this.name = requireNonNull(name, "Name must not be null");
@@ -108,6 +114,8 @@ public class RandomConfig implements Supplier<Properties> {
     StringBuilder sb     = new StringBuilder();
     int           len    = s.length();
     int           cUpper = upper, cLower = lower, cSpecial = specials, cNumber = numbers;
+    if (uuid)
+      return UUID.randomUUID().toString();
     while (sb.length() < length) {
       char c = s.charAt(r.nextInt(len));
       if (Character.isUpperCase(c) && cUpper > 0) {

@@ -19,6 +19,7 @@ import static org.infrastructurebuilder.randomid.maven.RandomConfig.DEFAULT_FORM
 import static org.infrastructurebuilder.randomid.maven.RandomConfig.DEFAULT_LENGTH;
 import static org.infrastructurebuilder.randomid.maven.RandomConfig.DEFAULT_NAME;
 import static org.infrastructurebuilder.randomid.maven.RandomConfig.DEFAULT_SPECIALS;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -28,6 +29,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.Properties;
+import java.util.UUID;
 
 import org.apache.maven.model.Model;
 import org.apache.maven.plugin.MojoExecutionException;
@@ -149,6 +151,24 @@ public class RandomIdPropertyMojoTest {
     mojo.execute();
     assertNotNull(mojo.project.getProperties().getProperty(String.format(DEFAULT_FORMAT, DEFAULT_NAME, 0)));
     assertNotNull(mojo.project.getProperties().getProperty(String.format(DEFAULT_FORMAT, DEFAULT_NAME, 1)));
+    assertNull(mojo.project.getProperties().getProperty(String.format(DEFAULT_FORMAT, DEFAULT_NAME, 2)));
+  }
+  @Test
+  public void testUuid() throws MojoExecutionException {
+    RandomConfig b1 = new RandomConfig();
+    b1.setUuid(true);
+    b1.setCount(2);
+    mojo.randomConfigs = List.of(b1);
+    mojo.skip = false;
+    mojo.execute();
+    String v1 = mojo.project.getProperties().getProperty(String.format(DEFAULT_FORMAT, DEFAULT_NAME, 0));
+    String v2 = mojo.project.getProperties().getProperty(String.format(DEFAULT_FORMAT, DEFAULT_NAME, 1));
+    UUID u1 = UUID.fromString(v1);
+    UUID u2 = UUID.fromString(v2);
+    assertNotNull(v1);
+    assertNotNull(v2);
+    assertEquals(v1, u1.toString());
+    assertEquals(v2, u2.toString());
     assertNull(mojo.project.getProperties().getProperty(String.format(DEFAULT_FORMAT, DEFAULT_NAME, 2)));
   }
 }
