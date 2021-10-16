@@ -11,6 +11,11 @@ Add a single "random" property of length 16 with at least one uppercase, lowerca
         <configuration>
           <randomConfigs>
             <randomConfig>
+              <!-- Add a property "fred" that is a random uuid string -->
+              <name>fred</name>
+              <uuid>true</uuid>
+            </randomConfig>
+            <randomConfig>
               <!-- these are the default values -->
               <name>random</name>
               <length>16</length>
