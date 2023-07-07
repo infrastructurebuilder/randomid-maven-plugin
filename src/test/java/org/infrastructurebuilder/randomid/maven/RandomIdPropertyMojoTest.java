@@ -1,4 +1,5 @@
 /*
+ * @formatter:off
  * Copyright © 2019 admin (admin@infrastructurebuilder.org)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,6 +13,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * @formatter:on
  */
 package org.infrastructurebuilder.randomid.maven;
 
@@ -39,11 +41,11 @@ import org.junit.jupiter.api.Test;
 
 public class RandomIdPropertyMojoTest {
 
-  MavenProject         project;
-  Path                 path;
+  MavenProject project;
+  Path path;
   RandomIdPropertyMojo mojo;
-  List<RandomConfig>   singleConfig, multiConfig;
-  RandomConfig         single;
+  List<RandomConfig> singleConfig, multiConfig;
+  RandomConfig single;
 
   @BeforeEach
   public void setUp() throws Exception {
@@ -117,6 +119,7 @@ public class RandomIdPropertyMojoTest {
     mojo.failOnOverwrite = true;
     assertThrows(IllegalArgumentException.class, () -> mojo.execute());
   }
+
   @Test
   public void testBroken3b() throws MojoExecutionException {
     RandomConfig b1 = new RandomConfig();
@@ -126,6 +129,7 @@ public class RandomIdPropertyMojoTest {
     mojo.skip = false;
     assertThrows(IllegalArgumentException.class, () -> mojo.execute());
   }
+
   @Test
   public void testBrokenish4() throws MojoExecutionException {
     RandomConfig b1 = new RandomConfig();
@@ -140,6 +144,7 @@ public class RandomIdPropertyMojoTest {
     mojo.execute();
     assertFalse(mojo.project.getProperties().getProperty("rando").equals("x"));
   }
+
   @Test
   public void testMultiple() throws MojoExecutionException {
     RandomConfig b1 = new RandomConfig();
@@ -153,6 +158,7 @@ public class RandomIdPropertyMojoTest {
     assertNotNull(mojo.project.getProperties().getProperty(String.format(DEFAULT_FORMAT, DEFAULT_NAME, 1)));
     assertNull(mojo.project.getProperties().getProperty(String.format(DEFAULT_FORMAT, DEFAULT_NAME, 2)));
   }
+
   @Test
   public void testUuid() throws MojoExecutionException {
     RandomConfig b1 = new RandomConfig();

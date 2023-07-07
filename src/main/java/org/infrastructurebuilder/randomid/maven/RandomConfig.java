@@ -1,4 +1,5 @@
 /*
+ * @formatter:off
  * Copyright © 2019 admin (admin@infrastructurebuilder.org)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,6 +13,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * @formatter:on
  */
 package org.infrastructurebuilder.randomid.maven;
 
@@ -26,23 +28,23 @@ import java.util.function.Supplier;
 
 public class RandomConfig implements Supplier<Properties> {
   public static final String DEFAULT_SPECIALS = "%!#()&[]|:;<>,./";
-  public final static String UPPER            = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-  public final static String LOWER            = UPPER.toLowerCase();
-  public final static String DIGITS           = "0123456789";
-  public static final String DEFAULT_NAME     = "random";
-  public static final String DEFAULT_FORMAT   = "%s%d";
-  public static final int    DEFAULT_LENGTH   = 16;
+  public final static String UPPER = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  public final static String LOWER = UPPER.toLowerCase();
+  public final static String DIGITS = "0123456789";
+  public static final String DEFAULT_NAME = "random";
+  public static final String DEFAULT_FORMAT = "%s%d";
+  public static final int DEFAULT_LENGTH = 16;
 
-  private String             name             = DEFAULT_NAME;
-  private int                count            = 0;
-  private int                length           = DEFAULT_LENGTH;
-  private int                lower            = 0;
-  private int                upper            = 0;
-  private int                specials         = 0;
-  private int                numbers          = 0;
-  private String             specialSet       = DEFAULT_SPECIALS;
-  private String             format           = DEFAULT_FORMAT;
-  private boolean            uuid             = false;
+  private String name = DEFAULT_NAME;
+  private int count = 0;
+  private int length = DEFAULT_LENGTH;
+  private int lower = 0;
+  private int upper = 0;
+  private int specials = 0;
+  private int numbers = 0;
+  private String specialSet = DEFAULT_SPECIALS;
+  private String format = DEFAULT_FORMAT;
+  private boolean uuid = false;
 
   public void setUuid(boolean uuid) {
     this.uuid = uuid;
@@ -93,8 +95,8 @@ public class RandomConfig implements Supplier<Properties> {
     int req = numbers + lower + upper + specials;
     if (length < req)
       throw new IllegalArgumentException(format("Length %d is less than required length %d", length, req));
-    String     s = UPPER + LOWER + DIGITS + specialSet;
-    Random     r = new Random(Instant.now().toEpochMilli());
+    String s = UPPER + LOWER + DIGITS + specialSet;
+    Random r = new Random(Instant.now().toEpochMilli());
     Properties p = new Properties();
     if (count == 0) {
       // single
@@ -111,9 +113,9 @@ public class RandomConfig implements Supplier<Properties> {
   }
 
   private String getRandomString(String s, Random r) {
-    StringBuilder sb     = new StringBuilder();
-    int           len    = s.length();
-    int           cUpper = upper, cLower = lower, cSpecial = specials, cNumber = numbers;
+    StringBuilder sb = new StringBuilder();
+    int len = s.length();
+    int cUpper = upper, cLower = lower, cSpecial = specials, cNumber = numbers;
     if (uuid)
       return UUID.randomUUID().toString();
     while (sb.length() < length) {

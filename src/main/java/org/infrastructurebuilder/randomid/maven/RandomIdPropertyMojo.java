@@ -1,4 +1,5 @@
 /*
+ * @formatter:off
  * Copyright © 2019 admin (admin@infrastructurebuilder.org)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,6 +13,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * @formatter:on
  */
 package org.infrastructurebuilder.randomid.maven;
 
@@ -31,16 +33,16 @@ import org.apache.maven.project.MavenProject;
 public class RandomIdPropertyMojo extends AbstractMojo {
 
   @Parameter(required = true, readonly = true, defaultValue = "${project}")
-  public MavenProject       project;
+  public MavenProject project;
 
   @Parameter(required = false, defaultValue = "false")
-  public boolean            skip;
+  public boolean skip;
 
   @Parameter(required = false)
   public List<RandomConfig> randomConfigs;
 
   @Parameter(required = false)
-  public boolean            failOnOverwrite;
+  public boolean failOnOverwrite;
 
   @Override
   public void execute() throws MojoExecutionException {
